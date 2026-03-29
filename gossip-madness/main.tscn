@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://la7gniwu0lwq"]
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="location" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.042000003
+anchor_right = 0.5
+anchor_bottom = 0.042000003
+offset_left = -56.0
+offset_top = -11.2160015
+offset_right = 56.0
+offset_bottom = 11.7839985
+grow_horizontal = 2
+text = "insert location"
+
+[node name="dialoguePanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.85300004
+anchor_right = 0.5
+anchor_bottom = 0.85300004
+offset_left = -393.5
+offset_top = -63.74402
+offset_right = 393.5
+offset_bottom = 63.25598
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="speaker" type="Label" parent="dialoguePanel"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="story" type="RichTextLabel" parent="dialoguePanel"]
+layout_mode = 2
+
+[node name="choices" type="VBoxContainer" parent="dialoguePanel"]
+layout_mode = 2
+
+[node name="stats" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.082
+anchor_top = 0.80200005
+anchor_right = 0.082
+anchor_bottom = 0.80200005
+offset_left = -74.464005
+offset_top = -96.696045
+offset_right = 74.535995
+offset_bottom = 96.303955
+
+[node name="VBoxContainer" type="VBoxContainer" parent="stats"]
+layout_mode = 2
+
+[node name="confidence" type="Label" parent="stats/VBoxContainer"]
+layout_mode = 2
+
+[node name="reputation" type="Label" parent="stats/VBoxContainer"]
+layout_mode = 2
+
+[node name="avatar" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.91400003
+anchor_top = 0.80200005
+anchor_right = 0.91400003
+anchor_bottom = 0.80200005
+offset_left = -74.92798
+offset_top = -96.696045
+offset_right = 74.07202
+offset_bottom = 96.303955
+
+[node name="speaker" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.5
+offset_top = -129.5
+offset_right = 147.5
+offset_bottom = 129.5
+grow_horizontal = 2
+grow_vertical = 2
