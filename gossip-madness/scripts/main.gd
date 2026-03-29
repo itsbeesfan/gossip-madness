@@ -11,8 +11,8 @@ var current_node = "scene_1"
 @onready var speaker_label = $dialoguePanel/speaker
 @onready var story_text = $dialoguePanel/story
 @onready var choices_box = $dialoguePanel/choices
-@onready var confidence_label = $stats/confidence
-@onready var reputation_label = $stats/reputation
+@onready var confidence_label = $stats/VBoxContainer/confidence
+@onready var reputation_label = $stats/VBoxContainer/reputation
 @onready var avatar_animation = $avatar
 @onready var speaker_animation = $speaker
 
@@ -54,7 +54,7 @@ var story = {
 
 	"sleepover_confrontation": {
 		"location": "sleepover",
-		"speaker": "you",
+		"speaker": "isabella",
 		"text": "you stare at the group and ask who said that, with a hint of panic in your tone. 'relax, we were just playing,' isabella says. no one makes eye contact with you.",
 		"choices": [
 			{"label": "say it didn't feel like a joke", "confidence": 8, "reputation": 6, "next": "sleepover_change"},
@@ -71,6 +71,27 @@ var story = {
 			{"label": "act nonchalant, and hope they forget later.", "confidence": -8, "reputation": -7, "next": "sleepover_change"},
 		]
 	},
+	
+	"sleepover_change": {
+		"location": "sleepover",
+		"speaker": "jules",
+		"text": "jules signs for you to go to the bathroom, while standing up and waiting for you to follow her. she's an acquaintance, you don't know her well.",
+		"choices": [
+			{"label": "go with jules", "confidence": 5, "reputation": 0, "next": "bathroom_one"},
+			{"label": "ask her 'what for?'", "confidence": -5, "reputation": 0, "next": "bathroom_one"}
+		]
+	},
+	
+	"bathroom_one": {
+		"location": "bathroom",
+		"speaker": "narrator",
+		"text": "the bathroom is bright, and yet, quiet. people have left their makeup, toiletries. you look in the mirror, and you're pale as a ghost.",
+		"choices": [
+			{"label": "breathe in and steady yourself", "confidence": 8, "reputation": 0, "next": "bathroom_talk"},
+			{"label": "avoid looking at yourself", "confidence": -5, "reputation": 0, "next": "bathroom_talk"}
+		]
+	},
+	
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -105,7 +126,7 @@ func clear_choices():
 func create_choice_button(choice_data):
 	var button = Button.new()
 	button.text = choice_data["label"]
-	button.custom_minimum_size = Vector2(0,60)
+	button.custom_minimum_size = Vector2(0,30)
 	
 	var local_choice = choice_data
 	button.pressed.connect(func(): choose_option(local_choice))
