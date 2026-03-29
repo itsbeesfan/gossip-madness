@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://n631j18hjchi"]
+
+[ext_resource type="FontFile" uid="uid://n0226bui3e0k" path="res://resources/Pixellari.ttf" id="1_ttyy2"]
+
+[resource]
+Button/fonts/font = ExtResource("1_ttyy2")
+Label/fonts/font = ExtResource("1_ttyy2")

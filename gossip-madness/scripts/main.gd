@@ -7,7 +7,7 @@ var current_node = "scene_1"
 
 #ui element load or something
 @onready var background = $background
-@onready var location_label = $location
+@onready var location_label = $Panel/location
 @onready var speaker_label = $dialoguePanel/speaker
 @onready var story_text = $dialoguePanel/story
 @onready var choices_box = $dialoguePanel/choices
@@ -28,17 +28,18 @@ var current_node = "scene_1"
 @onready var noelle_upset = preload("res://avatars/girl-upset.png")
 
 @onready var isabella_sprite = preload("res://avatars/npc1.png")
-#add more in a bit!!!!!
+@onready var jules_sprite = preload("res://avatars/jules.png")
+@onready var ariana_sprite = preload("res://avatars/ariana.png")
 
 var story = {
 	"scene_1": {
 		"location": "sleepover",
-		"speaker": "noelle",
+		"speaker": "narrator",
 		"text": "everyone is having a great time during the sleepover. suddenly, you hear your name being whispered from under the blankets. 'wait does she really have smelly feet?' someone says. a few girls laugh.",
 		"choices": [
 			{"label": "laugh it off and make a joke about it", "confidence": 5, "reputation": 9, "next": "sleepover_joke"},
-			{"label": "confront them and ask who said that", "confidence": 2, "reputation": 2, "next": "sleepover_confrontation"},
-			{"label": "pretend you heard nothing", "confidence": -5, "reputation": -5, "next": "sleepover_silence"}
+			{"label": "confront them and ask who said that", "confidence": 2, "reputation": -5, "next": "sleepover_confrontation"},
+			{"label": "pretend you heard nothing", "confidence": -10, "reputation": -5, "next": "sleepover_silence"}
 		]
 	},
 	
@@ -48,7 +49,7 @@ var story = {
 		"text": "you grin and get closer to the group. 'OH NO YOU EXPOSED ME.' a few people laugh with you instead of at you. it seems to be over, until you hear more whispering across the room.",
 		"choices": [
 			{"label": "ignore it and redirect attention with a crazy story", "confidence": 8, "reputation": 10, "next": "sleepover_change"},
-			{"label": "watch and see who is whispering", "confidence": 2, "reputation": 4, "next": "sleepover_change"},
+			{"label": "listen closely to find out who is whispering", "confidence": 2, "reputation": 4, "next": "sleepover_change"},
 		]
 	},
 
@@ -92,6 +93,55 @@ var story = {
 		]
 	},
 	
+	"bathroom_talk": {
+		"location": "bathroom",
+		"speaker": "jules",
+		"text": "'it got out of hand,' jules says, avoiding eye contact with you. 'isabella started it cause she left out... i dont think she meant for everyone to join in on it... but she didnt do anything to stop it either'",
+		"choices": [
+			{"label": "tell jules to help you talk to isabella", "confidence": 10, "reputation": 10, "next": "bathroom_truth"},
+			{"label": "say isabella should've known better", "confidence": 7, "reputation": -5, "next": "bathroom_truth"},
+			{"label": "blame yourself for being awkward and not standing up for yourself", "confidence": -15, "reputation": -5, "next": "bathroom_truth"}
+		]
+	},
+	
+	"bathroom_truth": {
+		"location": "bathroom",
+		"speaker": "jules",
+		"text": "'i dont think its your fault.' jules interrupts you. 'sorry..., and people do get weird when they want attention.' she glances towards the door. 'theyre gonna head out to the backyard.'",
+		"choices": [
+			{"label": "go outside to face it", "confidence": 10, "reputation": 7, "next": "backyard_one"},
+			{"label": "stay inside a little longer", "confidence": -5, "reputation": -5, "next": "backyard_one"}
+		]
+	},
+	
+	"backyard_one": {
+		"location": "backyard",
+		"speaker": "narrator",
+		"text": "it's dark. string lights glow over the backyard. the whispers are softer now, but they're still there...",
+		"choices": [
+			{"label": "sit with the group and slowly rejoin", "confidence": 5, "reputation": 5, "next": "backyard_choice"},
+			{"label": "pull ariana aside privately", "confidence": 10, "reputation": 10, "next": "backyard_choice"},
+			{"label": "stay at the edge of the group and keep to yourself", "confidence": -10, "reputation": -10, "next": "backyard_choice"}
+		]
+	},
+	
+	"backyard_choice": {
+		"location": "backyard",
+		"speaker": "ariana",
+		"text": "'noelle... it wasn't anything personal...' ariana says, while looking around. 'i was just messing around, it got out of hand. i... i guess im sorry.",
+		"choices": [
+			{"label": "set boundaries but accept the apology", "confidence": 15, "reputation": 15, "next": "ending"},
+			{"label": "get mad and call her out in front of everyone", "confidence": 10, "reputation": -15, "next": "ending"},
+			{"label": "walk away without answering.", "confidence": -5, "reputation": -5, "next": "ending"}
+		]
+	},
+	
+	"ending": {
+		"location": "backyard",
+		"speaker": "narrator",
+		"text": "",
+		"choices": []
+	}
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -126,7 +176,7 @@ func clear_choices():
 func create_choice_button(choice_data):
 	var button = Button.new()
 	button.text = choice_data["label"]
-	button.custom_minimum_size = Vector2(0,30)
+	button.custom_minimum_size = Vector2(0,16)
 	
 	var local_choice = choice_data
 	button.pressed.connect(func(): choose_option(local_choice))
@@ -162,17 +212,23 @@ func update_location_label(location):
 
 func update_speaker(speaker_name):
 	speaker_label.text = speaker_name
+	speaker_animation.visible = false
 	
 	match speaker_name:
 		"isabella":
 			speaker_animation.texture = isabella_sprite
 			speaker_animation.visible = true
-		#ADD MORE LATER PAPU
+		"jules":
+			speaker_animation.texture = jules_sprite
+			speaker_animation.visible = true
+		"ariana":
+			speaker_animation.texture = ariana_sprite
+			speaker_animation.visible = true
 		
 func update_avatar():
-	if confidence >= 50:
+	if confidence > 50:
 		avatar_animation.texture = noelle_happy
-	elif confidence >= 20:
+	elif confidence >= 30:
 		avatar_animation.texture = noelle_neutral
 	else:
 		avatar_animation.texture = noelle_upset
