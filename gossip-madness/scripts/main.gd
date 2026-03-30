@@ -28,7 +28,7 @@ var current_node = "scene_1"
 @onready var noelle_neutral = preload("res://avatars/girl-normal.png")
 @onready var noelle_upset = preload("res://avatars/girl-upset.png")
 
-@onready var isabella_sprite = preload("res://avatars/npc1.png")
+@onready var isabella_sprite = preload("res://avatars/isabella.png")
 @onready var jules_sprite = preload("res://avatars/jules.png")
 @onready var ariana_sprite = preload("res://avatars/ariana.png")
 
@@ -120,9 +120,20 @@ var story = {
 		"speaker": "NARRATOR",
 		"text": "it's dark. string lights glow over the backyard. the whispers are softer now, but they're still there...",
 		"choices": [
-			{"label": "sit with the group and slowly rejoin", "confidence": 5, "reputation": 5, "next": "backyard_choice"},
-			{"label": "pull ariana aside privately", "confidence": 10, "reputation": 10, "next": "backyard_choice"},
-			{"label": "stay at the edge of the group and keep to yourself", "confidence": -10, "reputation": -10, "next": "backyard_choice"}
+			{"label": "sit with the group and slowly rejoin", "confidence": 5, "reputation": 5, "next": "backyard_confrontation"},
+			{"label": "pull ariana aside privately", "confidence": 10, "reputation": 10, "next": "backyard_confrontation"},
+			{"label": "stay at the edge of the group and keep to yourself", "confidence": -10, "reputation": -10, "next": "backyard_confrontation"}
+		]
+	},
+	
+	"backyard_confrontation": {
+		"location": "backyard",
+		"speaker": "ARIANA",
+		"text": "you're eventually left alone with ariana. she doesn't say a thing, and you think of what to say.",
+		"choices": [
+			{"label": "'are you gonna stay there and act like nothing hapened?!'", "confidence": 10, "reputation": -10, "next": "backyard_choice"},
+			{"label": "'hey i need to talk to you about some stuff you said...'", "confidence": 5, "reputation": 8, "next": "backyard_choice"},
+			{"label": "stare at her.", "confidence": -10, "reputation": -8, "next": "backyard_choice"}
 		]
 	},
 	
@@ -220,13 +231,13 @@ func update_speaker(speaker_name):
 	speaker_animation.visible = false
 	
 	match speaker_name:
-		"isabella":
+		"ISABELLA":
 			speaker_animation.texture = isabella_sprite
 			speaker_animation.visible = true
-		"jules":
+		"JULES":
 			speaker_animation.texture = jules_sprite
 			speaker_animation.visible = true
-		"ariana":
+		"ARIANA":
 			speaker_animation.texture = ariana_sprite
 			speaker_animation.visible = true
 		

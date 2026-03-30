@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuqln7es7btee"
-path="res://.godot/imported/npc1.png-644885fc244247d0d7e1f0f642e05818.ctex"
+path="res://.godot/imported/isabella.png-aaa1971d027002862cd36f84e0d50d6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://avatars/npc1.png"
-dest_files=["res://.godot/imported/npc1.png-644885fc244247d0d7e1f0f642e05818.ctex"]
+source_file="res://avatars/isabella.png"
+dest_files=["res://.godot/imported/isabella.png-aaa1971d027002862cd36f84e0d50d6e.ctex"]
 
 [params]
 
