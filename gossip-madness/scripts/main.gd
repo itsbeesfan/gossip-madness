@@ -92,7 +92,7 @@ var story = {
 	"bathroom_one": {
 		"location": "bathroom",
 		"speaker": "NARRATOR",
-		"text": "the bathroom is bright, and yet, quiet. people have left their makeup, toiletries. you look in the mirror, and you're pale as a ghost.",
+		"text": "the bathroom is bright, and yet, quiet. people have left their makeup and toiletries. you look in the mirror, and you're pale as a ghost.",
 		"choices": [
 			{"label": "breathe in and steady yourself", "confidence": 8, "reputation": 0, "next": "bathroom_talk"},
 			{"label": "avoid looking at yourself", "confidence": -5, "reputation": 0, "next": "bathroom_talk"}
