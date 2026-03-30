@@ -32,3 +32,8 @@ the different scenes and change the stats and whatnot
 ### thanks!
 as always, **any feedback is greatly appreciated**. maybe this is the start to many other story games in godot, maybe rpgs, maybe something else... who knows!
 and a big thanks to reem and hc for snoozefest and sleepover, and to monti añañin for motivating me to finish this :p
+
+### images
+<img width="576" height="322" alt="Screenshot 2026-03-29 at 22 45 45" src="https://github.com/user-attachments/assets/dc7f39af-2ca9-4932-a5e6-b969a2c10bea" />
+<img width="916" height="515" alt="Screenshot 2026-03-29 at 22 46 36" src="https://github.com/user-attachments/assets/03493fa9-46fc-4e19-87bd-694e52e51b9e" />
+<img width="918" height="515" alt="Screenshot 2026-03-29 at 22 46 56" src="https://github.com/user-attachments/assets/f8fdda9f-1e66-4ce2-8d53-df9994ac55e8" />
