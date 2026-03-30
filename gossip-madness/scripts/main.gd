@@ -15,6 +15,7 @@ var current_node = "scene_1"
 @onready var reputation_label = $stats/VBoxContainer/reputation
 @onready var avatar_animation = $avatar
 @onready var speaker_animation = $speaker
+@onready var sfx = $sfx
 
 # assets load i guess
 
@@ -34,7 +35,7 @@ var current_node = "scene_1"
 var story = {
 	"scene_1": {
 		"location": "sleepover",
-		"speaker": "narrator",
+		"speaker": "NARRATOR",
 		"text": "everyone is having a great time during the sleepover. suddenly, you hear your name being whispered from under the blankets. 'wait does she really have smelly feet?' someone says. a few girls laugh.",
 		"choices": [
 			{"label": "laugh it off and make a joke about it", "confidence": 5, "reputation": 9, "next": "sleepover_joke"},
@@ -45,7 +46,7 @@ var story = {
 	
 	"sleepover_joke": {
 		"location": "sleepover",
-		"speaker": "you",
+		"speaker": "NARRATOR",
 		"text": "you grin and get closer to the group. 'OH NO YOU EXPOSED ME.' a few people laugh with you instead of at you. it seems to be over, until you hear more whispering across the room.",
 		"choices": [
 			{"label": "ignore it and redirect attention with a crazy story", "confidence": 8, "reputation": 10, "next": "sleepover_change"},
@@ -55,7 +56,7 @@ var story = {
 
 	"sleepover_confrontation": {
 		"location": "sleepover",
-		"speaker": "isabella",
+		"speaker": "ISABELLA",
 		"text": "you stare at the group and ask who said that, with a hint of panic in your tone. 'relax, we were just playing,' isabella says. no one makes eye contact with you.",
 		"choices": [
 			{"label": "say it didn't feel like a joke", "confidence": 8, "reputation": 6, "next": "sleepover_change"},
@@ -65,7 +66,7 @@ var story = {
 	
 	"sleepover_silence": {
 		"location": "sleepover",
-		"speaker": "you",
+		"speaker": "YOU",
 		"text": "you don't say anything, and somehow, the rumor evolves into 'she never showers.' well damn.",
 		"choices": [
 			{"label": "call your bestie for backup", "confidence": 6, "reputation": 5, "next": "sleepover_change"},
@@ -75,7 +76,7 @@ var story = {
 	
 	"sleepover_change": {
 		"location": "sleepover",
-		"speaker": "jules",
+		"speaker": "JULES",
 		"text": "jules signs for you to go to the bathroom, while standing up and waiting for you to follow her. she's an acquaintance, you don't know her well.",
 		"choices": [
 			{"label": "go with jules", "confidence": 5, "reputation": 0, "next": "bathroom_one"},
@@ -85,7 +86,7 @@ var story = {
 	
 	"bathroom_one": {
 		"location": "bathroom",
-		"speaker": "narrator",
+		"speaker": "NARRATOR",
 		"text": "the bathroom is bright, and yet, quiet. people have left their makeup, toiletries. you look in the mirror, and you're pale as a ghost.",
 		"choices": [
 			{"label": "breathe in and steady yourself", "confidence": 8, "reputation": 0, "next": "bathroom_talk"},
@@ -95,7 +96,7 @@ var story = {
 	
 	"bathroom_talk": {
 		"location": "bathroom",
-		"speaker": "jules",
+		"speaker": "JULES",
 		"text": "'it got out of hand,' jules says, avoiding eye contact with you. 'isabella started it cause she left out... i dont think she meant for everyone to join in on it... but she didnt do anything to stop it either'",
 		"choices": [
 			{"label": "tell jules to help you talk to isabella", "confidence": 10, "reputation": 10, "next": "bathroom_truth"},
@@ -106,7 +107,7 @@ var story = {
 	
 	"bathroom_truth": {
 		"location": "bathroom",
-		"speaker": "jules",
+		"speaker": "JULES",
 		"text": "'i dont think its your fault.' jules interrupts you. 'sorry..., and people do get weird when they want attention.' she glances towards the door. 'theyre gonna head out to the backyard.'",
 		"choices": [
 			{"label": "go outside to face it", "confidence": 10, "reputation": 7, "next": "backyard_one"},
@@ -116,7 +117,7 @@ var story = {
 	
 	"backyard_one": {
 		"location": "backyard",
-		"speaker": "narrator",
+		"speaker": "NARRATOR",
 		"text": "it's dark. string lights glow over the backyard. the whispers are softer now, but they're still there...",
 		"choices": [
 			{"label": "sit with the group and slowly rejoin", "confidence": 5, "reputation": 5, "next": "backyard_choice"},
@@ -127,7 +128,7 @@ var story = {
 	
 	"backyard_choice": {
 		"location": "backyard",
-		"speaker": "ariana",
+		"speaker": "ARIANA",
 		"text": "'noelle... it wasn't anything personal...' ariana says, while looking around. 'i was just messing around, it got out of hand. i... i guess im sorry.",
 		"choices": [
 			{"label": "set boundaries but accept the apology", "confidence": 15, "reputation": 15, "next": "ending"},
@@ -138,7 +139,7 @@ var story = {
 	
 	"ending": {
 		"location": "backyard",
-		"speaker": "narrator",
+		"speaker": "NARRATOR",
 		"text": "",
 		"choices": []
 	}
@@ -179,7 +180,11 @@ func create_choice_button(choice_data):
 	button.custom_minimum_size = Vector2(0,16)
 	
 	var local_choice = choice_data
-	button.pressed.connect(func(): choose_option(local_choice))
+	button.pressed.connect(func():
+		sfx.play()
+		choose_option(local_choice))
+	
+	
 	choices_box.add_child(button)
 	
 func choose_option(choice_data):

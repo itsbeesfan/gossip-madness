@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctmbtjflbjmdj"]
+[gd_scene load_steps=6 format=3 uid="uid://ctmbtjflbjmdj"]
 
+[ext_resource type="Script" uid="uid://bjgnwiy683dx5" path="res://scenes/start.gd" id="1_0auqf"]
 [ext_resource type="Texture2D" uid="uid://tebkcdwilcdb" path="res://backgrounds/backyard-bg.png" id="1_u80x2"]
 [ext_resource type="Theme" uid="uid://n631j18hjchi" path="res://resources/main.tres" id="2_bodal"]
+[ext_resource type="Texture2D" uid="uid://bb3rng7ivplrw" path="res://resources/gossip-madness-logot.png" id="2_kdmts"]
+[ext_resource type="AudioStream" uid="uid://bn6vcw5210d4x" path="res://resources/creatorshome-select-003-337609.mp3" id="5_0auqf"]
 
-[node name="Control" type="Control"]
+[node name="start" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0auqf")
 
 [node name="background" type="TextureRect" parent="."]
 modulate = Color(0.5534711, 0.55272704, 0.7013062, 1)
@@ -23,7 +27,25 @@ grow_vertical = 2
 texture = ExtResource("1_u80x2")
 stretch_mode = 4
 
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.15454
+offset_top = -246.0
+offset_right = 450.15454
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_kdmts")
+stretch_mode = 4
+
 [node name="play" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -39,34 +61,27 @@ grow_vertical = 2
 theme = ExtResource("2_bodal")
 text = "play game!"
 
-[node name="options" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.45800003
-anchor_top = 0.776
-anchor_right = 0.45800003
-anchor_bottom = 0.776
-offset_left = -52.116028
-offset_top = -17.848022
-offset_right = 44.383972
-offset_bottom = 17.151978
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("2_bodal")
-text = "options"
-
 [node name="quit" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.544
+anchor_left = 0.5
 anchor_top = 0.77500004
-anchor_right = 0.544
+anchor_right = 0.5
 anchor_bottom = 0.77500004
-offset_left = -47.68805
+offset_left = -48.0
 offset_top = -17.200012
-offset_right = 48.31195
+offset_right = 48.0
 offset_bottom = 17.799988
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_bodal")
 text = "quit"
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0auqf")
+volume_db = -3.67
+pitch_scale = 0.89
+
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

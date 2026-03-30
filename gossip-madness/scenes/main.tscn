@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://la7gniwu0lwq"]
+[gd_scene load_steps=9 format=3 uid="uid://la7gniwu0lwq"]
 
 [ext_resource type="Script" uid="uid://lof8ga5e65bt" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="FontFile" uid="uid://n0226bui3e0k" path="res://resources/Pixellari.ttf" id="2_0wfyh"]
 [ext_resource type="Theme" uid="uid://n631j18hjchi" path="res://resources/main.tres" id="3_sugp2"]
+[ext_resource type="AudioStream" uid="uid://c1cc6yt0r5ie7" path="res://resources/kissan4-cozy-rainfall-350614.mp3" id="4_jyhfs"]
+[ext_resource type="AudioStream" uid="uid://bn6vcw5210d4x" path="res://resources/creatorshome-select-003-337609.mp3" id="5_tbgi4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5qli"]
 bg_color = Color(0.3896266, 0.23337692, 0.7773921, 1)
@@ -174,3 +176,13 @@ offset_left = -71.92798
 offset_top = -93.696045
 offset_right = 78.07202
 offset_bottom = 96.303955
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jyhfs")
+volume_db = -12.32
+autoplay = true
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tbgi4")
+volume_db = -3.67
+pitch_scale = 0.89

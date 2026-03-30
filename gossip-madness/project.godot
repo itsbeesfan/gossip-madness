@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gossip-madness"
-run/main_scene="uid://la7gniwu0lwq"
+run/main_scene="uid://ctmbtjflbjmdj"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
