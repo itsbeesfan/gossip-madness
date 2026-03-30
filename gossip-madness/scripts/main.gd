@@ -32,6 +32,11 @@ var current_node = "scene_1"
 @onready var jules_sprite = preload("res://avatars/jules.png")
 @onready var ariana_sprite = preload("res://avatars/ariana.png")
 
+# pokemon type text idek broki
+var is_typing = false
+var full_text = ""
+var typing_speed = 0.03
+
 var story = {
 	"scene_1": {
 		"location": "sleepover",
@@ -175,12 +180,29 @@ func update_ui():
 	update_background(node["location"])
 	update_location_label(node["location"])
 	update_speaker(node["speaker"])
-	story_text.text = node["text"]
+	start_typing(node["text"])
 	
 	for choice in node["choices"]:
 		create_choice_button(choice)
 		
+
+func start_typing(text_to_show):
+	full_text = text_to_show
+	is_typing = true
 	
+	story_text.text = full_text
+	story_text.visible_characters = 0
+	
+	for i in range(full_text.length() + 1):
+		story_text.visible_characters = i
+		
+		if not is_typing:
+			story_text.visible_characters = -1
+			return
+			
+		await get_tree().create_timer(typing_speed).timeout
+	is_typing = false
+
 func clear_choices():
 	for child in choices_box.get_children():
 		child.queue_free()
